@@ -1,0 +1,30 @@
+{
+  "name": "node-express-delivery-web-app",
+  "version": "1.0.0",
+  "description": "Delivery web app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khubaib-11/Delivery-Node-Express-Web-App.git"
+  },
+  "author": "Khubaib Sajid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khubaib-11/Delivery-Node-Express-Web-App/issues"
+  },
+  "homepage": "https://github.com/khubaib-11/Delivery-Node-Express-Web-App#readme",
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "prettier": "^2.7.1"
+  }
+}
