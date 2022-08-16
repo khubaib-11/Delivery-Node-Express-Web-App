@@ -26,7 +26,7 @@ mongoose.connect(DB, () => {
 });
 
 // ! Starting the Server -
-const server = process.env.PORT || 3000;
-app.listen(server, () => {
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
   console.log('Server started 👋👋👋 ... ');
 });
