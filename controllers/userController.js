@@ -15,7 +15,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 
 // Get one User
 exports.getOneUser = catchAsync(async (req, res, next) => {
-  const user = await User.findOne(req.params);
+  const user = await User.findById(req.params.id);
 
   res.status(200).json({
     status: 'success',
@@ -34,5 +34,16 @@ exports.createUser = catchAsync(async (req, res, next) => {
     data: {
       user,
     },
+  });
+});
+
+// Delete One user
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await User.findOneAndDelete(req.params);
+
+  res.status(200).json({
+    status: 'success',
+    message: `User deleted...`,
+    data: null,
   });
 });
