@@ -39,7 +39,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
 
 // Delete One user
 exports.deleteUser = catchAsync(async (req, res, next) => {
-  const user = await User.findOneAndDelete(req.params);
+  await User.findByIdAndDelete(req.params.id);
 
   res.status(200).json({
     status: 'success',
