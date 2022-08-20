@@ -1,7 +1,30 @@
+const AppError = require('../utils/appError');
+
+const handleCastErrorDB = (err) => {
+  console.log(err);
+  const message = `Invalid : ${err.path} : ${err.value} -------`;
+  return new AppError(message, 404);
+};
+
+const handleDuplicateFieldDB = (err) => {
+  const value = err.keyValue.name;
+  // console.log(value);
+  const message = `Duplicate filed value : ---> ${value}. Please try a different value.`;
+  return new AppError(message, 400);
+};
+
+const handleValidationErrorDB = (err) => {
+  const message = err.message;
+  console.log(message);
+  return new AppError(message, 400);
+};
+
 //! This will be called when environment is === 'production'
 const sendProductionError = (error, res) => {
   // 1) Only send these details to user if error === isOperational
   if (error.isOperational) {
+    console.error(`An Error occurred ⚠️`, error);
+
     res.status(error.statusCode).json({
       status: error.status,
       message: error.message,
@@ -10,12 +33,13 @@ const sendProductionError = (error, res) => {
     // 2) If error comes from a packages or is a programming bug, don't leak error details. Send a normal message.
   } else {
     // 1) Logging error
-    console.error(`An Error occurred ⛔`, { error });
+    console.log(`An Error occurred ⛔`, error);
 
     // 2) Sending a formal message
     res.status(500).json({
       status: 'error',
       message: 'Something went very wrong.',
+      error: error,
     });
   }
 };
@@ -28,20 +52,34 @@ const sendDevelopmentError = (error, res) => {
     error: error,
     message: error.message,
     stack: error.stack,
-    line: error.lineNumber, // optional
-    cause: error.cause, // optional
+    name: error.name,
+    // line: error.lineNumber, // optional
+    // cause: error.cause, // optional
   });
 };
 
 //* This is Global error handling middleware used in app.js -
-module.exports = (error, req, res, next) => {
+module.exports = (err, req, res, next) => {
   // Default settings
-  error.statusCode = error.statusCode || 'error';
-  error.status = error.status || 500;
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || 'error';
 
   if (process.env.NODE_ENV === 'development') {
-    sendDevelopmentError(error, res);
+    sendDevelopmentError(err, res);
   } else if (process.env.NODE_ENV === 'production') {
+    // let error = { ...err };
+    let error = Object.create(err);
+
+    // Handling invalid id errors
+    if (error.path === '_id') error = handleCastErrorDB(error);
+
+    // Handling duplicate fields errors
+    if (error.code === 11000) error = handleDuplicateFieldDB(error);
+
+    // Handling invalid data in inputs
+    if (error.name === 'ValidationError')
+      error = handleValidationErrorDB(error);
+
     sendProductionError(error, res);
   }
 };
