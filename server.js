@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
+
+//! Handling Uncaught Rejections
+process.on('uncaughtException', (err) => {
+  console.log('Uncaught Exception ⚠️ ');
+  console.log(`Shutting down because of ${err.name} ---> ${err.message} \n`);
+  console.log(`Error stack: \n`);
+  console.log(`${err.stack} \n`);
+  // Closing server after finishing all requests
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
 const dotenv = require('dotenv');
 const app = require('./app');
-
 dotenv.config({ path: 'config.env' });
 
 // ! Switching & Connecting Databases according to environment-
