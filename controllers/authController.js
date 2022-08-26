@@ -95,7 +95,21 @@ exports.protectedRoute = catchAsync(async (req, res, next) => {
       new AppError('User recently changes password! Please login again', 401)
     );
   }
+  // Put user data on the request object
+  req.user = currentUser;
   next();
 });
 
+//! Authorization:
 
+// User Roles & Permissions
+exports.onlyAllowedTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError(`You are not allowed to perform this action.`, 403)
+      );
+    }
+    next();
+  };
+};
