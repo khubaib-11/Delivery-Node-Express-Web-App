@@ -10,13 +10,13 @@ router.post('/login', authController.login);
 
 router
   .route('/')
-  .get(userController.getAllUsers)
+  .get(authController.protectedRoute, userController.getAllUsers)
   .post(userController.createUser);
 
 router
   .route('/:id')
   .get(userController.getOneUser)
   .patch(userController.updateUser)
-  .delete(userController.deleteUser);
+  .delete(authController.protectedRoute,authController.onlyAllowedTo('admin'), userController.deleteUser);
 
 module.exports = router;
