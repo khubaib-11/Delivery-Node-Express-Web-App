@@ -19,7 +19,21 @@ const handleValidationErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
+const handleJwtTokenError = () => {
+  return new AppError(
+    'Your token is invalid / modified. Please login again.',
+    401
+  );
+};
+
+const handleExpiredToken = () =>
+  new AppError(
+    'Your token is Expired. Please login again to get a fresh token.',
+    401
+  );
+
 //! This will be called when environment is === 'production'
+
 const sendProductionError = (error, res) => {
   // 1) Only send these details to user if error === isOperational
   if (error.isOperational) {
@@ -45,6 +59,7 @@ const sendProductionError = (error, res) => {
 };
 
 //! This will be called when environment is === 'development'
+
 const sendDevelopmentError = (error, res) => {
   // Send as much details as possible to programmers, so they can fix error.
   res.status(error.statusCode).json({
@@ -70,7 +85,7 @@ module.exports = (err, req, res, next) => {
     // let error = { ...err };
     let error = Object.create(err);
 
-    // Handling invalid id errors
+    //? Handling invalid id errors (needs edit with path) -
     if (error.path === '_id') error = handleCastErrorDB(error);
 
     // Handling duplicate fields errors
@@ -79,6 +94,14 @@ module.exports = (err, req, res, next) => {
     // Handling invalid data in inputs
     if (error.name === 'ValidationError')
       error = handleValidationErrorDB(error);
+
+    // ### Handling JWT ERRORS ###
+
+    // Invalid JWT token handler
+    if (error.name === 'JsonWebTokenError') error = handleJwtTokenError();
+
+    // Expired JWT token handler
+    if (error.name === 'TokenExpiredError') error = handleExpiredToken();
 
     sendProductionError(error, res);
   }
