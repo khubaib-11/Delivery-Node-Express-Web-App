@@ -8,6 +8,13 @@ const router = express.Router();
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
 
+// Update Password Route (non-forgotten)
+router.patch(
+  '/updatePassword',
+  authController.protectedRoute,
+  authController.updatePassword
+);
+
 // Forgot Password and Reset Password Routes
 router.post('/forgotPassword', authController.forgotPassword);
 router.post('/resetPassword/:resetToken', authController.resetPassword);
