@@ -17,7 +17,14 @@ router.patch(
 
 // Forgot Password and Reset Password Routes
 router.post('/forgotPassword', authController.forgotPassword);
-router.post('/resetPassword/:resetToken', authController.resetPassword);
+router.patch('/resetPassword/:resetToken', authController.resetPassword);
+
+// Update Me Route (user's data except passwords)
+router.patch(
+  '/updateMe',
+  authController.protectedRoute,
+  userController.updateMe
+);
 
 router
   .route('/')
