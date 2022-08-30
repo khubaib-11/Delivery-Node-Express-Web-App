@@ -104,7 +104,7 @@ exports.protectedRoute = catchAsync(async (req, res, next) => {
 
 //! Authorization:
 
-// User Roles & Permissions
+// 1) --- User Roles & Permissions
 exports.onlyAllowedTo =
   (...roles) =>
   (req, res, next) => {
@@ -116,7 +116,7 @@ exports.onlyAllowedTo =
     next();
   };
 
-// Forgot Password
+// 2) --- Forgot Password
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // Step1) Find user based on POSTED email
   const user = await User.findOne({ email: req.body.email });
@@ -162,7 +162,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   }
 });
 
-// Reset Password
+// 3) --- Reset Password
 exports.resetPassword = catchAsync(async (req, res, next) => {
   // Step 1) Find user based on ID
   const hashedToken = crypto
@@ -196,6 +196,33 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       JWTToken,
+    },
+  });
+});
+
+// 4) --- Update logged in user password (non-forgotten)
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // Step 1) Get user from DB based on password
+  const user = await User.findById(req.user.id).select('+password');
+
+  // Step 2) Check if POSTed current password is correct
+  if (!(await user.matchPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Your password is wrong.', 401));
+  }
+  // Step 3) Update Password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+
+  await user.save();
+  // Step 4) Login user & send back a JWT token
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      token,
     },
   });
 });
