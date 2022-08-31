@@ -1,7 +1,6 @@
 const AppError = require('../utils/appError');
 
 const handleCastErrorDB = (err) => {
-  console.log(err);
   const message = `Invalid : ${err.path} : ${err.value} -------`;
   return new AppError(message, 404);
 };
@@ -14,17 +13,12 @@ const handleDuplicateFieldDB = (err) => {
 };
 
 const handleValidationErrorDB = (err) => {
-  const message = err.message;
-  console.log(message);
+  const { message } = err;
   return new AppError(message, 400);
 };
 
-const handleJwtTokenError = () => {
-  return new AppError(
-    'Your token is invalid / modified. Please login again.',
-    401
-  );
-};
+const handleJwtTokenError = () =>
+  new AppError('Your token is invalid / modified. Please login again.', 401);
 
 const handleExpiredToken = () =>
   new AppError(
