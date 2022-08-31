@@ -26,6 +26,13 @@ router.patch(
   userController.updateMe
 );
 
+// Delete Me Route (Inactivate users account)
+router.delete(
+  '/deleteMe',
+  authController.protectedRoute,
+  userController.deleteMe
+);
+
 router
   .route('/')
   .get(authController.protectedRoute, userController.getAllUsers)
