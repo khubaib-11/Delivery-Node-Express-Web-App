@@ -6,6 +6,24 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/sendEmail');
 
+const createToken = function (id) {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+};
+
+const sendToken = function (user, statusCode, res) {
+  const token = createToken(user._id);
+
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 // SignUp
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
@@ -17,17 +35,8 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordChangedAt: req.body.passwordChangedAt,
   });
 
-  const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-
-  res.status(200).json({
-    status: 'success',
-    token,
-    data: {
-      newUser,
-    },
-  });
+  // Send Token
+  sendToken(newUser, 201, res);
 });
 
 // Log In
@@ -49,22 +58,15 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email or password!', 401)); // 401 means unauthorized
   }
 
-  //Step 2) If everything is OK, generate a token
-  const token = jwt.sign({ id: foundUser._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-
-  res.status(200).json({
-    status: 'success',
-    token,
-  });
+  //Step 2) If everything is OK, send token
+  sendToken(foundUser, 200, res);
 });
 
-// Protected Routes handler
+/* ===========
+ Protected Routes handler :
 
-// --------------
-// Main Functionality ----> protect certain routes from non-logged in users.
-// --------------
+ Main Functionality ----> protect certain routes from non-logged in users.
+ =========== */
 
 exports.protectedRoute = catchAsync(async (req, res, next) => {
   // Step 1) Check if user has provided the token & it starts with "Bearer" word.
@@ -187,17 +189,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetTokenExpires = undefined;
 
   await user.save();
-  // 4) Log the user in, send JWT
-  const JWTToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      JWTToken,
-    },
-  });
+  // 4) Log the user in & send back a JWT token
+  sendToken(user, 200, res);
 });
 
 // 4) --- Update logged in user password (non-forgotten)
@@ -214,15 +207,6 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
 
   await user.save();
-  // Step 4) Login user & send back a JWT token
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      token,
-    },
-  });
+  // Step 4) Log the user in & send back a JWT token
+  sendToken(user, 200, res);
 });
