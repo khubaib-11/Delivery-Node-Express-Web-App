@@ -42,12 +42,28 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
+// Delete Me (Deactivates users account)
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, {
+    accountActive: false,
+  });
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+});
+
+// =============================
+// FOR ADMINS ONLY
+// =============================
 // Get All Users
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
 
   res.status(200).json({
     status: 'success',
+    results: users.length,
     data: {
       users,
     },
