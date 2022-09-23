@@ -9,6 +9,7 @@ const morgan = require('morgan');
 const logger = require('tracer');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const compression = require('compression');
 
 const orderRouter = require('./routes/orderRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -17,7 +18,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
-
+app.enable('trust proxy');
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -68,6 +69,8 @@ app.use('/api', limitRequests);
 //   console.log(req.file);
 //   next();
 // });
+
+app.use(compression());
 
 //* Routes -
 

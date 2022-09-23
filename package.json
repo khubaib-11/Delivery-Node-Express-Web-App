@@ -6,7 +6,8 @@
   "scripts": {
     "watch-nodemon": "nodemon server.js",
     "watch-sass": "sass --no-source-map --watch public/sass/main.scss public/css/main.css",
-    "start": "npm-run-all --parallel watch-sass watch-nodemon",
+    "start": "node server.js",
+    "start:dev": "npm-run-all --parallel watch-sass watch-nodemon",
     "start:prod": "SET NODE_ENV=production&&nodemon server.js"
   },
   "repository": {
@@ -36,6 +37,7 @@
     "@babel/polyfill": "^7.12.1",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
