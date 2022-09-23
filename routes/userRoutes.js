@@ -7,12 +7,20 @@ const router = express.Router();
 // SignUp and Login Routes
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
+router.get('/logout', authController.logout);
 
 // Update Password Route (non-forgotten)
 router.patch(
   '/updatePassword',
   authController.protectedRoute,
   authController.updatePassword
+);
+
+// Add Location Route
+router.patch(
+  '/addLocation',
+  authController.protectedRoute,
+  userController.addLocation
 );
 
 // Forgot Password and Reset Password Routes
@@ -23,6 +31,8 @@ router.patch('/resetPassword/:resetToken', authController.resetPassword);
 router.patch(
   '/updateMe',
   authController.protectedRoute,
+  userController.uploadUserPhoto,
+  userController.resizePhoto,
   userController.updateMe
 );
 

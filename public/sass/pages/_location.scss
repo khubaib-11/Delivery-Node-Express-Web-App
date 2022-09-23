@@ -1,0 +1,34 @@
+.location__help {
+    // outline: 1px solid black;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+.location__help--txet {
+    // outline: 1px solid black;
+    // width: 90%;
+    // margin-left:auto ;
+    // text-align: left;
+}
+
+.location__help--do {
+    display: flex;
+    gap: 2rem;
+}
+
+.location__help--do:nth-child(2) {
+    margin-top: 1.6rem;
+    margin-bottom: 5rem;
+}
+
+.location__help--dont {
+    display: flex;
+    gap: 2rem;
+}
+
+.location__help--step2 {
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+}

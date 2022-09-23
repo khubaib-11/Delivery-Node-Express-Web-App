@@ -1,0 +1,28 @@
+.map__page {
+    background-color: #2a2a2ad9;
+}
+
+#map {
+    width: 90ve;
+    height: 80vh;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    margin-top: 2.5rem;
+
+    position: relative;
+}
+
+.add__location {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: #2a2a2a;
+    color: #ffffff;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    font-weight: bold;
+    // border-radius: 5px;
+    // border: 1px solid #ffffff;
+}

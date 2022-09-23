@@ -1,0 +1,41 @@
+<%- include('./includes/head.ejs') %> 
+
+
+  </head>
+  <body class="welcome">
+    <section class="welcome__page pageContainer">
+      <!-- navbar -->
+
+      <nav class="welcome__navbar">
+        <h3>Logo</h3>
+        <a class="welcome__navbar__skip--link" href="/">Skip ></a>
+      </nav>
+
+      <!-- body -->
+
+      <div class="welcome__body">
+        <img
+          class="welcome__body--image"
+          src="images/welcome_illustration.svg"
+          alt=""
+        />
+        <p class="welcome__body--text">Welcome !</p>
+      </div>
+
+      <!-- btn -->
+
+      <div class="auth__buttons margin-top-md">
+        <a
+          href="http://127.0.0.1:3000/signup"
+          class="btn-primary padding-buttons-lg"
+          >Create Account</a
+        >
+        <a href="/login" class="login">Login</a>
+      </div>
+    </section>
+
+    <script src="/js/index.js"></script>
+    <!-- btn -->
+  </body>
+</html>
+

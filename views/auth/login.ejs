@@ -1,0 +1,74 @@
+<%- include('../includes/head.ejs') %> 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    
+<section class="login__page pageContainer">
+
+ <!-- back icon -->
+ <a href="/welcome" class="back-icon-box">
+  <svg class="icon back-icon">
+    <use  xlink:href="images/sprite.svg#icon-back"></use>
+  </svg>
+ </a>
+ 
+ <!-- heading -->
+ <h2 class="signup__heading heading-md">Log In</h2>
+ <p class="signup__text">Please login if you have an account:</p>
+
+ <!-- form -->
+ <form action="#" class="auth__form login__form margin-top-bot-sm">
+
+   <!-- Email Input -->
+   <div class="auth__form--input ">
+     <svg class="icon">
+       <use xlink:href="images/sprite.svg#icon-mobile"></use>
+     </svg>
+
+     <div class="input email__input">
+       <label for="email">Email</label>
+       <input
+         type="email"
+         name="email"
+         id="email"
+         placeholder="khubaib@gmail.com"
+       />
+     </div>
+   </div>
+
+   <!-- Password Input -->
+   <div class="auth__form--input">
+     <svg class="icon">
+       <use xlink:href="images/sprite.svg#icon-lock"></use>
+     </svg>
+
+     <div class="input password__input">
+       <label for="password">Password</label>
+       <input
+         type="password"
+         name="password"
+         id="password"
+         min="8"
+         placeholder="Your Password"
+       />
+     </div>
+   </div>
+  
+   <button href="#" class="btn-primary login-btn padding-buttons-lg margin-top-sm">Send</button>
+
+   <!-- </div> -->
+ </form>
+
+ <!-- create account btn -->
+ <div class="auth__buttons margin-top-sm">
+   <!-- <button href="#" class="btn-primary login-btn padding-buttons-lg">Send</button> -->
+   <p class="paragraph">
+     Don't have an account? <u><a class="btn" href="/signup">Create Account</a></u>
+   </p>
+ </div>
+
+    </section>
+
+<script  src="js/index.js" > </script>
+</body>
+</html>

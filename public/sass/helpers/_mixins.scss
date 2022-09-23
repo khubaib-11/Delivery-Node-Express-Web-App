@@ -1,0 +1,28 @@
+// Flex Row Center
+@mixin flex_row--center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Flex Row space between
+@mixin flex_row--spaceBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+// Flex Column 
+@mixin flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+// Flex Column Center
+@mixin flex_column--center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,28 @@
+// Helpers
+@import 'helpers/margins';
+@import 'helpers/mixins';
+@import 'helpers/variables';
+
+// Components
+@import 'components/icons';
+@import 'components/buttons';
+@import 'components/navbar';
+@import 'components/model';
+@import 'components/alerts';
+
+// Base
+@import 'base/base';
+@import 'base/typography';
+@import 'base/animations';
+
+
+// Pages
+@import 'pages/welcomePage';
+@import 'pages/sign-upPage';
+@import 'pages/loginPage';
+@import 'pages/homePage';
+@import 'pages/profilePage';
+@import 'pages/editProfile';
+@import 'pages/location';
+@import 'pages/map';
+@import 'pages/salesDashBoard.scss';

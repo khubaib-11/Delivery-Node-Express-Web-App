@@ -1,0 +1,105 @@
+<%- include('../includes/head.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  </head>
+  <body>
+    <section class="signup__page pageContainer">
+      <!-- back icon -->
+      <a class="back-icon-box" href="/welcome">
+        <svg class="icon back-icon">
+            <use xlink:href="images/sprite.svg#icon-back"></use>
+        </svg>
+    </a>
+      <!-- heading -->
+      <h2 class="signup__heading heading-md">Create Account</h2>
+      <!-- text -->
+      <p class="signup__text">Please create account to continue:</p>
+      <!-- form -->
+      <form action="#" class="auth__form signup__form">
+        <!-- Name Input -->
+
+        <div class="auth__form--input">
+          <svg class="icon">
+            <use xlink:href="images/sprite.svg#icon-name"></use>
+          </svg>
+
+          <div class="input name__input">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Khubaib Sajid"
+            />
+          </div>
+        </div>
+
+        <!-- Email Input -->
+        <div class="auth__form--input">
+          <svg class="icon">
+            <use xlink:href="images/sprite.svg#icon-mobile-2"></use>
+          </svg>
+
+          <div class="input email__input">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="khubaib@gmail.com"
+            />
+          </div>
+        </div>
+        <!-- Password Input -->
+        <div class="auth__form--input">
+          <svg class="icon">
+            <use xlink:href="images/sprite.svg#icon-lock"></use>
+          </svg>
+
+          <div class="input password__input">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+            
+              placeholder="Create Your Password"
+            />
+          </div>
+        </div>
+        <!-- Password Confirm Input -->
+        <div class="auth__form--input">
+          <svg class="icon">
+            <use xlink:href="images/sprite.svg#icon-lock"></use>
+          </svg>
+
+          <div class="input passwordConfirm__input">
+            <label for="passwordConfirm">Confirm Password</label>
+            <input
+              type="password"
+              name="passwordConfirm"
+              id="passwordConfirm"
+            
+              placeholder="Confirm Password"
+            />
+          </div>
+        </div>
+
+        <button href="#" class="btn-primary  padding-buttons-lg margin-top-sm">Create Account</button>
+
+      </form>
+
+      <!-- create account btn -->
+      <div class="auth__buttons margin-top-sm">
+        <!-- <a href="#" class="btn-primary  padding-buttons-lg">Create Account</a> -->
+        <p>
+          Already have an account? <u> <a class="btn" href="/login">Login Now</a> </u>
+        </p>
+      </div>
+
+      <!-- login btn -->
+    </section>
+    <script src="js/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body class="location">
+        <section class="location__page pageContainer">
+            <nav class="navbar">
+                <div class="back-icon-box">
+                    <svg class="icon back-icon">
+                        <use xlink:href="images/sprite.svg#icon-back"></use>
+                    </svg>
+                </div>
+            </nav>
+            <!-- pop Up -->
+            <div class="model">
+                <div class="model__front">
+                    <div class="model__container">
+                        <h3 class="model__heading">Where to deliver the order?</h3>
+                        <p class="model__message">We need your address to deliver the order. Don't worry, this
+                            step is really easy. Click the button:</p>
+                        <div class="model__btn">
+                            <a href="/map" class="btn-primary--outline padding-buttons-sm ">Add Address</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="model__back"></div>
+
+            </div>
+            </main>
+             <footer class="location__help">
+                <div class="location__help--heading">
+                    <h4>It is simple:</h4>
+                </div>
+                <div class="location__help--txet">
+                    <div class="location__help--do">
+                        <span>
+                            <svg class="icon">
+                                <use xlink:href="images/sprite.svg#icon-tick"></use>
+                              </svg>
+                        </span>
+                        <p class="location__help--paragraph">When you click the button, app ask your permission to find your
+                            location automatically.</p>
+                    </div>
+                    <div class="location__help--do" >
+                        <span>
+                            <svg class="icon">
+                                <use xlink:href="images/sprite.svg#icon-tick"></use>
+                              </svg>
+                        </span>
+                        <p class="location__help--paragraph">Click allow and a map will appear with your location. If you
+                            think the location is not 100% accurate, then you can adjust it by moving the location- -icon.
+                        </p>
+                    </div>
+                    <div class="location__help--dont" >
+                        <span>
+                            <svg class="icon">
+                                <use xlink:href="images/sprite.svg#icon-cross"></use>
+                              </svg>
+                        </span>
+                        <p class="location__help--paragraph">We recommend not to change your location from the map if you
+                            are not 100% sure. In that case, use the location that app found.</p>
+                    </div>
+                </div>
+                
+               
+            </footer>
+        </section>
+
+    </body>
+
+    </html>

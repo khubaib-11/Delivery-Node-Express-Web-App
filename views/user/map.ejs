@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
+    </head>
+
+    <body class="location">
+        <section class="map__page pageContainer">
+            <nav class="navbar">
+                <div class="back-icon-box">
+                    <svg class="icon back-icon">
+                        <use xlink:href="images/sprite.svg#icon-back"></use>
+                    </svg>
+                </div>
+            </nav>
+            <!-- pop Up -->
+            <main>
+                
+                <div id="map" class="mapboxgl-map"></div>
+                <a href="#" name="location" class="btn  add__location">Add Address</a>
+            </main>
+           
+        </section>
+
+        <script src="js/index.js"></script>
+
+    </body>
+
+    </html>
+
+<!-- pk.eyJ1Ijoia2h1YmFpYi0xMSIsImEiOiJjbDg2cjZ4eXoxMjJwM3VsaDFxbDF1bG44In0.YMCOcBUXgLK4LK7XW1fc6w -->

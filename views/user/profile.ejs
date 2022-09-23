@@ -1,0 +1,100 @@
+<%- include('../includes/head.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    </head>
+
+    <body class="profile">
+
+        <section class="profile__page pageContainer">
+
+            <nav class="navbar">
+                <a href="/" class="back-icon-box">
+                    <svg class="icon back-icon">
+                        <use xlink:href="images/sprite.svg#icon-back"></use>
+                    </svg>
+                </a>
+                <svg class="icon setting-icon">
+                    <use xlink:href="images/sprite.svg#icon-settings"></use>
+                </svg>
+            </nav>
+            <!-- Profile Pic -->
+
+            <!-- For Logged in user -->
+            <main>
+                <% if (user != 'guest') { %>
+                        <div class="user__profile--data">
+                            <div class="user__image--box">
+                                <img src="images/users/<%= user.photo  %> " alt="">
+                            </div>
+                            <div class="user__details--box">
+                                <h4 class="user__profile--name">
+                                    <%= user.name %>
+                                </h4>
+                                <p class="user__profile--email">
+                                    <%= user.email %>
+
+                                </p>
+                                <a href="/editProfile" class="user__profile--edit-btn">
+                                    Edit Profile
+                                    <svg class="icon next-icon">
+                                        <use xlink:href="images/sprite.svg#icon-back"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Order History -->
+                        <div class="order__history">
+                            <h4 class="order__history--heading">Orders History:</h4>
+                            <img src="images/Order.svg" alt="">
+                            <p>No orders history found!</p>
+
+                        </div>
+                        <!-- For Non-logged in users -->
+                        <% } else if(user === 'guest') { %>
+                            <div class="user__profile--data">
+                                <div class="user__image--box">
+                                    <img src="images/Avatar-Male-1.svg" alt="">
+                                </div>
+                                <div class="user__details--box">
+                                    <h4 class="user__profile--name">
+                                        Guest
+                                    </h4>
+                                    <p class="user__profile--email">
+                                        Your Email
+                                    </p>
+                                    <button href="#" class="user__profile--edit-btn">
+                                        Edit Profile
+                                        <svg class="icon next-icon">
+                                            <use xlink:href="images/sprite.svg#icon-back"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Order History -->
+                            <div class="order__history">
+                                <h4 class="order__history--heading">Orders History:</h4>
+                                <img src="images/Order.svg" alt="">
+                                <p>Login to see your orders history.</p>
+    
+                            </div>
+                            <% } %>
+            </main>
+
+            <!-- For Logged in user -->
+            <% if(user != 'guest') {%> 
+            <footer class="profile__page--footer margin-top-sm">
+                <a href="#" class=" btn-primary btn__logout padding-buttons-lg ">Log out</a>
+            </footer>
+            <% } else if(user === 'guest') { %> 
+            
+            <!-- For Non-logged in users -->
+            <footer class="profile__page--footer margin-top-sm">
+                <a href="/login" class=" btn-primary padding-buttons-lg ">Log In</a>
+            </footer>
+            <% } %> 
+            <!-- Log Out -->
+        </section>
+        <script src="js/index.js"></script>
+    </body>
+
+    </html>

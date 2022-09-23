@@ -1,0 +1,53 @@
+<%- include('./includes/head.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    </head>
+
+    <body class="home">
+
+        <section class="home__page pageContainer">
+
+            <!-- welcome user message -->
+            <nav class="navbar padding-top-md">
+                <% if (user ==='guest' ) { %>
+                    <p>Welcome Guest </p>
+                    <% } else if(user != 'guest') { %>
+                        <p>Welcome <%= user.name.split(' ')[0] %>
+                        </p>
+                        <% } %>
+
+                            <!-- user profile -->
+                            <% if (user ==='guest' ) { %>
+                                <a href="/login" class="login-btn">
+                                    Login
+                                </a>
+                            <% } else if(user != 'guest') { %>
+                                    <a href="/profile" class="user__profile">
+                                        <img src="images/users/<%= user.photo  %> " alt="<%= user.name  %>'s Photo ">
+                                    </a>
+                            <% } %>
+
+            </nav>
+            <main class="home__page--content margin-top-md">
+                <img class="home__page--image" src="images/homePgaeillustration.svg" alt="Home Screen Illustration">
+                <p class="home__page--message padding-top-sm">
+                    Take a picture of your shopping list <br> and send us. We will deliver it to <br> your door.
+                </p>
+            </main>
+
+            <footer class="home__page--footer margin-top-md">
+                <!-- <a class="btn-primary padding-buttons-lg">Send List</a> -->
+                <form class="order__form">
+                <input class="form__upload" type="file"  accept="image/*" name="order" id="order">
+                <!-- <input class="form__upload" type="file" accept="image/*" id="photo" name="photo"> -->
+
+                <label class=" upload__order--btn padding-buttons-lg" for="order">Send List</label>
+                <button class="send__order--btn padding-buttons-lg hidden">Send List</button>
+                 </form>
+            </footer>
+
+        </section>
+        <script src="js/index.js"></script>
+    </body>
+
+    </html>

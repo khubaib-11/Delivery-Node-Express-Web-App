@@ -1,0 +1,30 @@
+.icon {
+  fill: #2a2a2a;
+  width: 16px;
+  height: 16px;
+}
+
+.back-icon-box {
+  border: 2px solid #2a2a2a73;
+  border-radius: 50%;
+  width: 30.5px;
+  height: 30px;
+  margin-top: 3rem;
+
+  @include flex_row--center;
+}
+
+.back-icon {
+  margin-right: 2px; // Visually Center icon
+}
+
+.next-icon {
+  rotate: 180deg; // To correct its shape in button
+}
+
+.setting-icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 3rem;
+
+}

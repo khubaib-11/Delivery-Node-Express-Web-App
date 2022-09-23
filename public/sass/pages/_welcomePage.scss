@@ -1,0 +1,20 @@
+.welcome__page {
+    background-color: $white  !important;
+}
+
+.welcome__navbar {
+    color: #2a2a2a;
+    padding: 1.6rem 2rem;
+
+    @include flex_row--spaceBetween
+}
+
+.welcome__navbar__skip--link {
+    color: #2a2a2a;
+}
+
+.welcome__body {
+    margin-top: 10rem;
+
+    @include flex_column--center
+}

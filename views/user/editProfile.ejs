@@ -1,0 +1,66 @@
+<%- include('../includes/head.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    </head>
+
+    <body class="editProfile">
+
+        <section class="editProfile__page pageContainer">
+            <a class="back-icon-box" href="/">
+                <svg class="icon back-icon">
+                    <use xlink:href="images/sprite.svg#icon-back"></use>
+                </svg>
+            </a>
+            <section class="editProfile__personal--data">
+                <h1>Your account settings</h1>
+
+                <form class="editProfileData__form">
+                    <div class="form__group">
+                        <label class="form__label" for="name">Name</label>
+                        <input id="name" class="form__input" type="text" name="name" value="<%= user.name %> ">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="name">Email</label>
+                        <input id="email" class="form__input" type="email" name="email" value="<%= user.email
+                         %> ">
+                    </div>
+                    <div class="form__group form__photo-upload">
+                        <img src="images/users/<%= user.photo  %> " alt="">
+                        <input class="form__upload" type="file" accept="image/*" id="photo" name="photo">
+                        <label class="upload__photo" for="photo">Choose new photo</label>
+                    </div>
+
+                    <button class="btn btn-primary padding-buttons-lg">Save settings</button>
+                </form>
+            </section>
+
+            <div class="line">&nbsp;</div>
+           
+            <section class="editProfile__personal--data">
+                <h1>Password change</h1>
+
+                <form class="editProfilePassword__form">
+                    <div class="form__group">
+                        <label class="form__label" for="password-current">Current password</label>
+                        <input id="password-current" class="form__input" type="password" placeholder='••••••••'  required="true"  >
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="password">New password</label>
+                        <input id="password" class="form__input" type="password" placeholder='••••••••' required="true">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="password-confirm">Confirm password</label>
+                        <input id="password-confirm" class="form__input" type="password" placeholder='••••••••' required="true" >
+                    </div>
+                   
+
+                    <button class="btn btn-edit-profile btn-primary padding-buttons-lg">Save Password</button>
+                </form>
+            </section>
+          
+            <!-- Log Out -->
+        </section>
+        <script src="js/index.js"></script>
+    </body>
+
+    </html>

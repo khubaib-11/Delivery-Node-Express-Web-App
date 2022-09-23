@@ -8,6 +8,36 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A user must have a name'],
   },
+  photo: {
+    type: String,
+    default: 'Avatar-Male-1.svg',
+  },
+  firstLocation: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point',
+    },
+    coordinates: {
+      type: [Number],
+    },
+  },
+  secondLocation: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point',
+    },
+    coordinates: {
+      type: [Number],
+    },
+  },
+  orders: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Order',
+    },
+  ],
   role: {
     type: String,
     enum: ['admin', 'user'],

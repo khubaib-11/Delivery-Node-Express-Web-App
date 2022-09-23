@@ -1,0 +1,45 @@
+.user__profile--data {
+    margin-top: 4rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.user__image--box {
+    width: 12rem;
+}
+
+.user__image--box img {
+    width: 100%;
+    border-radius: 1rem;
+
+}
+
+.user__details--box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.order__history {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+}
+
+
+.order__history img {
+    width: 60%;
+    align-self: center;
+}
+
+.order__history p {
+    align-self: center;
+}
+
+.profile__page--footer {
+    display: flex;
+    justify-content: center;
+}

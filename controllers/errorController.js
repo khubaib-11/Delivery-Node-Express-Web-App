@@ -28,43 +28,72 @@ const handleExpiredToken = () =>
 
 //! This will be called when environment is === 'production'
 
-const sendProductionError = (error, res) => {
-  // 1) Only send these details to user if error === isOperational
-  if (error.isOperational) {
-    console.error(`An Error occurred ⚠️`, error);
+const sendProductionError = (error, req, res) => {
+  // A) API
+  if (req.originalUrl.startsWith('/api')) {
+    // 1) Only send these details to user if error === isOperational
+    if (error.isOperational) {
+      console.error(`An Error occurred ⚠️`, error);
 
-    res.status(error.statusCode).json({
-      status: error.status,
-      message: error.message,
-    });
-
+      return res.status(error.statusCode).json({
+        status: error.status,
+        message: error.message,
+      });
+    }
     // 2) If error comes from a packages or is a programming bug, don't leak error details. Send a normal message.
-  } else {
-    // 1) Logging error
+    // a) Logging error
     console.log(`An Error occurred ⛔`, error);
 
-    // 2) Sending a formal message
-    res.status(500).json({
+    // b) Sending a formal message
+    return res.status(500).json({
       status: 'error',
       message: 'Something went very wrong.',
       error: error,
+      msg: error.message,
     });
   }
+
+  // B) RENDERED PAGES
+  if (error.isOperational) {
+    // 1) Only send these details to user if error === isOperational
+    console.error(`An Error occurred ⚠️`, error);
+
+    return res.status(error.statusCode).json({
+      status: error.status,
+      message: error.message,
+    });
+  }
+  // 2) If error comes from a packages or is a programming bug, don't leak error details. Send a normal message.
+  // a) Logging error
+  console.log(`An Error occurred ⛔`, error);
+
+  // b) Sending a formal message
+  return res.status(500).json({
+    status: 'error',
+    message: 'Something went very wrong.',
+    error: error,
+  });
 };
 
 //! This will be called when environment is === 'development'
 
-const sendDevelopmentError = (error, res) => {
-  // Send as much details as possible to programmers, so they can fix error.
-  res.status(error.statusCode).json({
-    status: error.status,
-    error: error,
-    message: error.message,
-    stack: error.stack,
-    name: error.name,
-    // line: error.lineNumber, // optional
-    // cause: error.cause, // optional
-  });
+const sendDevelopmentError = (error, req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    // Send as much details as possible to programmers, so they can fix error.
+    res.status(error.statusCode).json({
+      status: error.status,
+      error: error,
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+    });
+  } else {
+    res.status(error.statusCode).render('error', {
+      title: '404 Not Found',
+      heading: 'We are sorry !',
+      msg: error.message,
+    });
+  }
 };
 
 //* This is Global error handling middleware used in app.js -
@@ -74,7 +103,7 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || 'error';
 
   if (process.env.NODE_ENV === 'development') {
-    sendDevelopmentError(err, res);
+    sendDevelopmentError(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
     // let error = { ...err };
     let error = Object.create(err);
@@ -97,6 +126,6 @@ module.exports = (err, req, res, next) => {
     // Expired JWT token handler
     if (error.name === 'TokenExpiredError') error = handleExpiredToken();
 
-    sendProductionError(error, res);
+    sendProductionError(error, req, res);
   }
 };
